@@ -1,9 +1,27 @@
 import socket
-from const import *
 
+filename = input("What is the filaname: ")
+dest = input("What is the destination file: ")
+host = input("What is the host: ")
 
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect((HOST, PORT)) 
+try:
+    port = int(input("What is the port: "))
+except:
+    print("Invalid")
+    exit()
 
-client.send("HELLO".encode(FORMAT))
-print(client.recv(MAX_SIZE).decode(FORMAT))
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+s.connect((host,port))
+s.send(filename.encode())
+message = s.recv(1024).decode()
+if message == "!NOTFOUND":
+    print("Not found")
+else:
+    f = open(dest, 'wb')
+    while True:
+        x = s.recv(1024)
+        if not x:
+            print("Done")
+            break
+        f.write(x)
