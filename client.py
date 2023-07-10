@@ -1,6 +1,6 @@
 import socket
 
-filename = input("What is the filaname: ")
+filename = input("What is the filename: ")
 dest = input("What is the destination file: ")
 host = input("What is the host: ")
 
