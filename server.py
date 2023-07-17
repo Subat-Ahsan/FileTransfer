@@ -10,20 +10,20 @@ DIR = 'files'
 if not os.path.isdir(DIR):
     os.mkdir(DIR)
 
+import os
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 server.bind((LOCAL_HOST,PORT))
 
 
-server.listen()
 
 while True:
+    server.listen()
     conn, addr = server.accept()
     print(f"Connected to {addr}")
     filename = conn.recv(MAX_SIZE).decode()
-    
     if filename in os.listdir(DIR):
-        conn.send("FOUND".encode())
+        conn.send(f"FOUND,{os.path.getsize(os.path.join(DIR,filename))}".encode())
         f = open(os.path.join(DIR,filename),'rb')
         while True:
             x = f.read(1024)

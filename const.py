@@ -1,7 +1,0 @@
-import const
-
-LOCAL_HOST = '192.168.2.145'
-HOST = '76.71.120.113'
-PORT = 7090
-MAX_SIZE = 1024
-FORMAT = 'utf-8'
